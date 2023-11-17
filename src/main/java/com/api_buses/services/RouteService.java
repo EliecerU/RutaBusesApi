@@ -6,6 +6,8 @@ import java.util.ArrayList;
 // import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import javax.annotation.Nonnull;
+
 import org.springframework.stereotype.Service;
 
 import com.api_buses.models.RouteModel;
@@ -15,7 +17,6 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QuerySnapshot;
-import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 import com.google.firebase.internal.NonNull;
 // import com.google.firestore.v1.WriteResult;
@@ -31,8 +32,7 @@ public class RouteService {
         return ThreadLocalRandom.current().nextInt(minimo, maximo + 1);
     }
 
-    @NonNull
-    static String generateIdRandom(){
+    static @NonNull String generateIdRandom(){
 
         String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         // La cadena en donde iremos agregando un carácter aleatorio
@@ -64,7 +64,7 @@ public class RouteService {
         return routes;
     }
 
-    public RouteModel getRoute(String documentId) throws InterruptedException, ExecutionException {
+    public RouteModel getRoute(@Nonnull String documentId) throws InterruptedException, ExecutionException {
         Firestore db = FirestoreClient.getFirestore();
         DocumentReference dcReference = db.collection("Routes").document(documentId);
         ApiFuture<DocumentSnapshot> future = dcReference.get();
@@ -78,19 +78,20 @@ public class RouteService {
         return null;
     }
 
-    public void postRoute(RouteModel route) {
+    @SuppressWarnings("null")
+	public void postRoute(RouteModel route) {
         Firestore db = FirestoreClient.getFirestore();
         db.collection("Routes").document(generateIdRandom()).set(route);
         // return collection.get().getUpdateTime().toString();
     }
 
-    public void delete(String name) {
+    public void delete(@Nonnull String name) {
         Firestore db = FirestoreClient.getFirestore();
         db.collection("Routes").document(name).delete();
         // routes.remove(dReference);
     }
 
-    public void putRoute(String name, RouteModel route) throws InterruptedException, ExecutionException {
+    public void putRoute(@Nonnull String name, @NonNull @Nonnull RouteModel route) throws InterruptedException, ExecutionException {
         Firestore db = FirestoreClient.getFirestore();
         db.collection("Routes").document(name).set(route);
     }

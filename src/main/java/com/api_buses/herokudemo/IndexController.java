@@ -1,4 +1,4 @@
-package com.example.herokudemo;
+package com.api_buses.herokudemo;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
