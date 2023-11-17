@@ -36,11 +36,14 @@ public class RouteController {
         return routeService.getRoutes();
     }
 
-    @PutMapping("/routes/update/{id}")
-    public RouteModel putRoute(@PathVariable String id, @RequestBody RouteModel route) {
-        //TODO: process PUT request
-        
-        return routeService.putRoute(id, route);
+    @GetMapping("/routes/get/{id}")
+    public RouteModel getRoutes(@PathVariable("id") String id) throws InterruptedException, ExecutionException {
+        return routeService.getRoute(id);
+    }
+
+    @PutMapping("/routes/update/{name}")
+    public void putRoute(@PathVariable String name, @RequestBody RouteModel route) throws InterruptedException, ExecutionException {
+        routeService.putRoute(name, route);
     }
 
     @PostMapping("/routes/post")
@@ -48,8 +51,8 @@ public class RouteController {
         routeService.postRoute(route);
     }
 
-    @DeleteMapping("/routes/delete/{id}")
-    public void deleteRoute(@PathVariable("id") String id){
+    @DeleteMapping("/routes/delete/{name}")
+    public void deleteRoute(@PathVariable("name") String id){
         routeService.delete(id);
     }
 
