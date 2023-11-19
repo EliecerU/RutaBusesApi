@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * RouteController
  */
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("api/v1")
 public class RouteController {
 
     @Autowired
