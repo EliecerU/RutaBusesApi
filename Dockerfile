@@ -1,7 +1,10 @@
 
-FROM openjdk:17
+FROM maven:3.9.5-openjdk-17 AS build
+COPY . .
+RUN mvn clean package -DskipTests
 
-COPY target/demo.jar demo.jar
-COPY src ./src
+FROM openjdk:17.0.1-jdk-slim
 
-ENTRYPOINT ["java", "-jar", "/demo.jar"]
+COPY --from=build target/demo.jar demo.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "demo.jar"]
