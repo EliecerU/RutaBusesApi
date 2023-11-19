@@ -1,8 +1,10 @@
 package com.api_buses.demo;
 
 // import java.io.File;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Objects;
 // import java.util.Objects;
 
 import org.springframework.boot.SpringApplication;
@@ -20,18 +22,19 @@ import com.google.firebase.FirebaseOptions;
 public class DemoApplication {
 
 	public static void main(String[] args) throws IOException, NullPointerException  {
+/*
+		ClassLoader classLoader = DemoApplication.class.getClassLoader();
 
-		// ClassLoader classLoader = DemoApplication.class.getClassLoader();
+		File file = new File(Objects.requireNonNull(classLoader.getResource("../serviceAccountKey.json")).getFile());
+		FileInputStream serviceAccount = new FileInputStream(file.getAbsolutePath());
+		FirebaseOptions options =  FirebaseOptions.builder()
+		 		.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+		 		.build();
 
-		// File file = new File(Objects.requireNonNull(classLoader.getResource("src/main/resources/serviceAccountKey.json")).getFile());
-		// FileInputStream serviceAccount = new FileInputStream(file.getAbsolutePath());
-		// FirebaseOptions options =  FirebaseOptions.builder()
-		// 		.setCredentials(GoogleCredentials.fromStream(serviceAccount))
-		// 		.build();
+		 FirebaseApp.initializeApp(options);
 
-		// FirebaseApp.initializeApp(options);
-
-		FileInputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccountKey.json");
+		 */
+		FileInputStream serviceAccount = new FileInputStream("../serviceAccountKey.json");
 
 			FirebaseOptions options = FirebaseOptions.builder()
 			.setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -40,6 +43,8 @@ public class DemoApplication {
 			FirebaseApp.initializeApp(options);
 
 		SpringApplication.run(DemoApplication.class, args);
+
+
 	}
 
 }
