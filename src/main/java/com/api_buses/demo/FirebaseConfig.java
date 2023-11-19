@@ -25,7 +25,7 @@ public class FirebaseConfig {
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .build();
 
-        FirebaseApp app;
+        FirebaseApp app = null;
         if (FirebaseApp.getApps().isEmpty()) {
             app = FirebaseApp.initializeApp(options, "ruta-buses");
         } else {
