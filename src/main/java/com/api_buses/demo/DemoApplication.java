@@ -33,7 +33,7 @@ public class DemoApplication {
 
 		FileInputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccountKey.json");
 
-			FirebaseOptions options = new FirebaseOptions.Builder()
+			FirebaseOptions options = FirebaseOptions.builder()
 			.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 			.build();
 
